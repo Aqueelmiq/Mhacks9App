@@ -12,6 +12,10 @@ import { MainComponent } from './main/main.component';
 import { SearchcomponentComponent } from './searchcomponent/searchcomponent.component';
 import { TradeviewComponent } from './tradeview/tradeview.component';
 import { NavComponent } from './nav/nav.component';
+import { GraphComponent } from './graph/graph.component';
+import { StockinfoComponent } from './stockinfo/stockinfo.component';
+import { StockbuyerComponent } from './stockbuyer/stockbuyer.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const firebase = {
   apiKey: 'AIzaSyB9YrpgoobvwiSG7QvdudEsK7X4PZuuyk4',
@@ -32,7 +36,8 @@ const ROUTES = [
     component: LoginComponent
   },
   { path: 'home', component: MainComponent },
-  { path: 'trade', component: TradeviewComponent}
+  { path: 'trade', component: TradeviewComponent},
+  { path: 'profile', component: ProfileComponent}
 ];
 
 const authConfig = {
@@ -47,7 +52,11 @@ const authConfig = {
     MainComponent,
     SearchcomponentComponent,
     TradeviewComponent,
-    NavComponent
+    NavComponent,
+    GraphComponent,
+    StockinfoComponent,
+    StockbuyerComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
