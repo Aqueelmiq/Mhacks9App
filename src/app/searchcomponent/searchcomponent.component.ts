@@ -8,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SearchcomponentComponent implements OnInit {
 
   keyword: String;
-  constructor(
-  ) {
+  constructor() {
     this.keyword = '';
   }
 
@@ -17,6 +16,6 @@ export class SearchcomponentComponent implements OnInit {
   }
 
   searchAction(){
-    console.log(this.keyword)
+    console.log(this.keyword);
   }
 }
