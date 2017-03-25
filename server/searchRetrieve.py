@@ -1,13 +1,18 @@
+from flask import Flask, request, jsonify
 import urllib.request
 import re
+
+app = Flask(__name__)
 
 def getExtension(meme):
     return '-'.join(word.lower() for word in meme.split())
 
+### INFO RETRIEVAL ###
+info = ['cap','img_url']
 def cap(meme):  #total amount of searches
-    extension = getExtension(meme)
-    url = 'http://knowyourmeme.com/memes/{}'.format(extension)
-    regexp = r"<a href=\\'\/memes\/{}\\' rel=\\'nofollow\\'>(\d*,?\d*,?\d+)<\/a>".format(extension)
+    #meme is in extension form (hyphenated)
+    url = 'http://knowyourmeme.com/memes/{}'.format(meme)
+    regexp = r"<a href=\\'\/memes\/{}\\' rel=\\'nofollow\\'>(\d*,?\d*,?\d+)<\/a>".format(meme)
 
     try:
         with urllib.request.urlopen(url) as w:
@@ -23,8 +28,7 @@ def cap(meme):  #total amount of searches
         return None
                 
 def img_url(meme):
-    extension = getExtension(meme)
-    url = 'http://knowyourmeme.com/memes/{}'.format(extension)
+    url = 'http://knowyourmeme.com/memes/{}'.format(meme)
     regexp = r'<a href=\"(http:\/\/i\d\.kym-cdn\.com.+)\" class=\"photo left\">'
 
     try:
@@ -39,9 +43,18 @@ def img_url(meme):
         print("Meme not in the repository")
         return None
 
-if __name__ == '__main__':  #for debugging purposes
+@app.route("/meme")
+def meme2json():
+    memename = request.args['name']
+    extension = getExtension(memename)
+    json_dict = { f: eval('{}(\'{}\')'.format(f,extension)) for f in info}
+    return jsonify(json_dict)
+
+if __name__ == '__main__':
+    app.run()
+    '''  #for debugging purposes
     memes = ['harambe the gorilla', 'pepe the frog', 'forever alone', 'me gusta']
     for meme in memes:
         print('-->',meme)
-        print(cap(meme))
-        print(img_url(meme))
+        print(meme2json(meme))
+    '''
