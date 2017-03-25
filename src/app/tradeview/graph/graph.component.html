@@ -1,0 +1,27 @@
+<div class="card mb-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row my-4 ml-3 justify-content-between">
+        <div class="col">
+          <h1 class="display-6"> 30 Day Data</h1>
+        </div>
+        <div class="col-md-3">
+          <button class="btn small btn-outline-secondary"> Live </button>
+          <button class="btn small btn-outline-secondary"> 30 Day </button>
+          <button class="btn small btn-outline-secondary"> Custom </button>
+        </div>
+      </div>
+      <div>
+        <canvas baseChart width="400" height="100"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
