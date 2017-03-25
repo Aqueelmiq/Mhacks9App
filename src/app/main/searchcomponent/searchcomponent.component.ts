@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/dataservice.service';
-import {Observable} from "rxjs";
+import { Stock } from '../../models/Stock'
 
 @Component({
   selector: 'app-searchcomponent',
@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 export class SearchComponent implements OnInit {
 
   keyword: string;
-  memes: any[]; //Observable<any[]>;
+  memes: Stock[]; //Observable<any[]>;
   constructor(public ds: DataService) {
     this.keyword = '';
   }
@@ -29,5 +29,9 @@ export class SearchComponent implements OnInit {
   searchAction(){
     console.log(this.keyword);
     this.memes = this.ds.getMemes(this.keyword);
+  }
+
+  selectMeme(meme) {
+
   }
 }

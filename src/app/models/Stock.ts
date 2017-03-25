@@ -9,5 +9,9 @@ export class Stock {
   year_low: number;
   img_url: string;
 
+  constructor(name:string, image:string) {
+    this.name = name;
+    this.img_url = image;
+  }
 
 }

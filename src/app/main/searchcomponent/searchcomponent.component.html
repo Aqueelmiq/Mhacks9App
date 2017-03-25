@@ -1,18 +1,21 @@
 <div class="col-md-6 push-md-3 mt-3">
   <div class="input-group">
-    <input [(ngModel)]="keyword" id="1" class="form-control" type="text" name="keyword" placeholder="Search..." required/>
+    <input (keyup)="searchAction()" [(ngModel)]="keyword" id="1" class="form-control" type="text" name="keyword" placeholder="Search..." required/>
     <span class="input-group-btn search-btn">
       <button (click)="searchAction()" class="btn btn-primary text-white"   type="submit">
       <i class="glyphicon glyphicon-search" aria-hidden="true"></i> <strong>Search</strong>
       </button>
       </span>
   </div>
-  <ul class="list-group">
+  <ul class="list-group py-2">
     <li *ngFor="let meme of memes"
-        class="list-group-item"
+        class="list-group-item li-item row align-items-center"
         (mouseover)="highlight($event)" (mouseout)="dehighlight($event)"
-        (click)="getDeals(suggestion)">
-      {{ meme }}
+        (click)="selectMeme(meme)">
+        <div class="col-md-3">
+          <img class="img-thumbnail clear-size-img" src="{{meme.img_url}}">
+        </div>
+        <div class="col-md-9"> {{meme.name}}</div>
     </li>
   </ul>
 </div>
