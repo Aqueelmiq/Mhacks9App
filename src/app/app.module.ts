@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { SearchcomponentComponent } from './searchcomponent/searchcomponent.component';
 import { TradeviewComponent } from './tradeview/tradeview.component';
+import { NavComponent } from './nav/nav.component';
 
 export const firebase = {
   apiKey: 'AIzaSyB9YrpgoobvwiSG7QvdudEsK7X4PZuuyk4',
@@ -45,7 +46,8 @@ const authConfig = {
     LoginComponent,
     MainComponent,
     SearchcomponentComponent,
-    TradeviewComponent
+    TradeviewComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
