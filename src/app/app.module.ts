@@ -17,6 +17,9 @@ import { GraphComponent } from './tradeview/graph/graph.component';
 import { StockinfoComponent } from './tradeview/stockinfo/stockinfo.component';
 import { StockbuyerComponent } from './tradeview/stockbuyer/stockbuyer.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserinfoComponent } from './profile/userinfo/userinfo.component';
+import { PortfolioComponent } from './profile/portfolio/portfolio.component';
+import { AnalysisComponent } from './profile/analysis/analysis.component';
 
 export const firebase = {
   apiKey: 'AIzaSyB9YrpgoobvwiSG7QvdudEsK7X4PZuuyk4',
@@ -57,7 +60,10 @@ const authConfig = {
     GraphComponent,
     StockinfoComponent,
     StockbuyerComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserinfoComponent,
+    PortfolioComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,
