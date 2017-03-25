@@ -9,6 +9,7 @@ import { DataService } from './services/dataservice/dataservice.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
+import { SearchcomponentComponent } from './searchcomponent/searchcomponent.component';
 
 export const firebase = {
   apiKey: 'AIzaSyB9YrpgoobvwiSG7QvdudEsK7X4PZuuyk4',
@@ -40,7 +41,8 @@ const authConfig = {
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    SearchcomponentComponent
   ],
   imports: [
     BrowserModule,

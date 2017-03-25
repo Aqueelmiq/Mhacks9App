@@ -1,0 +1,16 @@
+<div class="col-md-4 push-md-5 mt-5">
+<div class="row">
+<form role="form" id="form-buscar">
+  <div class="form-group">
+    <div class="input-group">
+      <input [(ngModel)]="keyword" id="1" class="form-control" type="text" name="keyword" placeholder="Search..." required/>
+      <span class="input-group-btn">
+      <button (click)="searchAction()" class="btn btn-success"   type="submit">
+      <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search
+      </button>
+      </span>
+    </div>
+  </div>
+</form>
+  </div>
+</div>
