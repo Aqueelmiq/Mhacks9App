@@ -4,17 +4,24 @@
     <table class="table">
       <tbody>
       <tr>
+
         <td>
-          <div class="form-group">
-          <label for="exampleInputEmail1"> Price: </label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          </div>
+          Quantity
         </td>
         <td>
           <div class="form-group">
-          <label for="exampleInputPassword1"> Qty </label>
-          <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
+            <label for="exampleInputEmail1"> Total Price </label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form-group">
+          <input [(ngModel)]="quantity" (keyup)="calculatePrice()" type="number" class="form-control" id="quantity" placeholder="Enter number">
+          </div>
+        </td>
+        <td>
+          {{mathh}}
         </td>
       </tr>
       </tbody>
@@ -27,20 +34,19 @@
         <div class="row">
           <div class="form-check pl-3">
             <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+              <input type="radio" (click)="stock_buy()" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
               Buy
             </label>
           </div>
           <div class="form-check pl-3">
             <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+              <input type="radio" (click)="stock_sell()" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
               Sell
             </label>
           </div>
         </div>
       </fieldset>
     </form>
-    <p class="card-text">With supporting text below as a natural.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <a href="#" class="btn btn-primary">{{toggleText}}</a>
   </div>
 </div>
