@@ -6,11 +6,11 @@ import {AngularFireModule, AuthProviders, AuthMethods} from 'angularfire2';
 import { RouterModule } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 
-import { DataService } from './services/dataservice/dataservice.service';
+import { DataService } from './services/dataservice.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
-import { SearchcomponentComponent } from './main/searchcomponent/searchcomponent.component';
+import { SearchComponent } from './main/searchcomponent/searchcomponent.component';
 import { TradeviewComponent } from './tradeview/tradeview.component';
 import { NavComponent } from './nav/nav.component';
 import { GraphComponent } from './tradeview/graph/graph.component';
@@ -51,7 +51,7 @@ const authConfig = {
     AppComponent,
     LoginComponent,
     MainComponent,
-    SearchcomponentComponent,
+    SearchComponent,
     TradeviewComponent,
     NavComponent,
     GraphComponent,
