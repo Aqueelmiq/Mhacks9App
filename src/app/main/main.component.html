@@ -2,7 +2,22 @@
   <div class="row py-3">
     <img class="img-fluid col-md-1 ml-5" src="../../assets/logo.png"/>
     <div class="col-md-3 push-md-9">
-      <button class="btn btn-primary text-white"> Login </button>
+      <button class="btn btn-primary text-white" a href="#" data-toggle="modal" data-target="#login-modal"> Login </button>
+
+      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="loginmodal-container">
+            <h1>Login to Your Account</h1><br>
+              <input [(ngModel)]="email" name="email" type="email" class="form-control" id="form-email" placeholder="Email">
+              <input [(ngModel)]="password" name="password" type="password" class="form-control" id="form-pswd" placeholder="Password">
+            <button (click)="onAuthenticate()" type="button" class="push-md-4 col-md-4 btn btn-primary"> {{hi.btnText}}</button>
+
+            <div class="login-help">
+               <a href="#">Forgot Password</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <button class="btn bg-info text-white"> Sign Up </button>
     </div>
   </div>
