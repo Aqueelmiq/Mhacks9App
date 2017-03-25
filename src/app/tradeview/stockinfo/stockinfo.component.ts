@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-stockinfo',
@@ -13,7 +14,7 @@ export class StockinfoComponent implements OnInit {
   memeHigh: String;
   memeLow: String;
 
-  constructor() {
+  constructor(public routing:ActivatedRoute) {
     this.memeName = "Pepe the frog";
     this.currentPrice = "$5";
     this.marketCap = "50 mil";
@@ -23,6 +24,9 @@ export class StockinfoComponent implements OnInit {
   }
 
   ngOnInit() {
+     this.routing.params.subscribe(params => {
+       this.memeName = params['name'];
+     });
   }
 
 }

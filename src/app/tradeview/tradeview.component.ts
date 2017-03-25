@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-tradeview',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TradeviewComponent implements OnInit {
 
-  constructor() { }
+  memeImg = "http://i.imgur.com/PsziB.jpg"
+  constructor(public routing: ActivatedRoute) { }
 
   ngOnInit() {
+    this.routing.params.subscribe(params => {
+      this.memeImg = params['img'];
+    });
   }
 
 }

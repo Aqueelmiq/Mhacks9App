@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/dataservice.service';
 import { Stock } from '../../models/Stock'
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-searchcomponent',
@@ -11,7 +13,7 @@ export class SearchComponent implements OnInit {
 
   keyword: string;
   memes: Stock[]; //Observable<any[]>;
-  constructor(public ds: DataService) {
+  constructor(public ds: DataService, public router: Router) {
     this.keyword = '';
   }
 
@@ -32,6 +34,6 @@ export class SearchComponent implements OnInit {
   }
 
   selectMeme(meme) {
-
+    this.router.navigate(['/trade', { name: meme.name, img: meme.img_url}]);
   }
 }
