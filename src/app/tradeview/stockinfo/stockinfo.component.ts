@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Stock} from "../../models/Stock";
+import {Meme} from "../../models/Meme";
+import {DataService} from "../../services/dataservice.service";
 
 @Component({
   selector: 'app-stockinfo',
@@ -9,28 +11,29 @@ import {Stock} from "../../models/Stock";
 })
 export class StockinfoComponent implements OnInit {
 
-  @Input() stock: Stock;
-  memeName:String;
-  currentPrice:String;
-  marketCap: String;
-  opening: String;
-  memeHigh: String;
-  memeLow: String;
+  @Input() stock: Meme = this.ds.getDefaultMeme();
+  memeName:string;
+  currentPrice:string;
+  marketCap: string;
+  opening: string;
+  memeHigh: string;
+  memeLow:string;
 
-  constructor(public routing:ActivatedRoute) {
-    //this.memeName = this.stock.name;
-    /**
-    this.currentPrice = "$" + this.stock.current_price;
-    this.marketCap = this.stock.cap + " mil";
-    this.opening = "$" + this.stock.current_price; ;
-    this.memeHigh = this.stock.year_high + "";
-    this.memeLow = this.stock.year_low + ""; **/
+  constructor(public routing:ActivatedRoute, public ds: DataService) {
+    this.routing.params.subscribe(params => {
+      this.memeName = params['name'];
+      this.stock = this.ds.getMemes(this.memeName)[0];
+      this.currentPrice = "$" + this.stock.current_value;
+      this.marketCap = this.stock.year_high*834 + " mil";
+      this.opening = "$" + this.stock.current_value;
+      this.memeHigh = this.stock.year_high + "";
+      this.memeLow = this.stock.year_low + "";
+    });
+
+
   }
 
   ngOnInit() {
-     this.routing.params.subscribe(params => {
-       this.memeName = params['name'];
-     });
   }
 
 }

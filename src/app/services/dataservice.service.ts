@@ -79,4 +79,7 @@ export class DataService {
   }
 
 
+  getDefaultMeme() {
+    return new Meme("A", "a", 1, 2, 3);
+  }
 }

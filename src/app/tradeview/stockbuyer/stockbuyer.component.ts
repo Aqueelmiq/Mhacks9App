@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AngularFire} from "angularfire2";
 import {Stock} from "../../models/Stock";
+import {Meme} from "../../models/Meme";
+import {DataService} from "../../services/dataservice.service";
 
 @Component({
   selector: 'app-stockbuyer',
@@ -9,7 +11,7 @@ import {Stock} from "../../models/Stock";
 })
 export class StockbuyerComponent implements OnInit {
 
-  @Input() stock: Stock;
+  @Input() stock: Meme = this.ds.getDefaultMeme();
   name:string;
   quantity: number;
   currentPrice: number;
@@ -21,7 +23,7 @@ export class StockbuyerComponent implements OnInit {
   balance: number;
   new_bal:number;
   stock_dic: Object;
-  constructor(public af: AngularFire) {
+  constructor(public af: AngularFire, public ds: DataService) {
 
    // this.name = this.stock.name;
     this.toggleText = "Buy Stock"
