@@ -8,7 +8,6 @@ import { ChartsModule } from 'ng2-charts';
 
 import { DataService } from './services/dataservice.service';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { SearchComponent } from './main/searchcomponent/searchcomponent.component';
 import { TradeviewComponent } from './tradeview/tradeview.component';
@@ -32,12 +31,8 @@ export const firebase = {
 const ROUTES = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   },
   { path: 'home', component: MainComponent },
   { path: 'trade', component: TradeviewComponent},
@@ -52,7 +47,6 @@ const authConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     MainComponent,
     SearchComponent,
     TradeviewComponent,
