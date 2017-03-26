@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {FirebaseListObservable, AngularFire} from "angularfire2";
+import {FirebaseListObservable, AngularFire, FirebaseObjectObservable} from "angularfire2";
 
 @Component({
   selector: 'app-userinfo',
@@ -8,7 +8,7 @@ import {FirebaseListObservable, AngularFire} from "angularfire2";
   styleUrls: ['./userinfo.component.css']
 })
 export class UserinfoComponent implements OnInit {
-  items: FirebaseListObservable<any[]>;
+  items: FirebaseObjectObservable<any[]>;
   url: string;
 
   memeName:String;
@@ -29,10 +29,11 @@ export class UserinfoComponent implements OnInit {
     this.profileImg = "http://emojipedia-us.s3.amazonaws.com/cache/29/27/29278aa57ced9c9b3861d8f4960e4748.png";
 
     this.af.auth.subscribe((auth) => {
-      this.url = "/user/" + auth["uid"];
+      this.url = "user/" + auth["uid"];
       console.log(this.url);
-      this.items = this.af.database.list(this.url);
-      this.items.subscribe(item =>{
+      this.items = this.af.database.object(this.url);
+      this.items.subscribe( item => {
+          console.log(JSON.stringify(item));
           this.memeName = item["2"].$value,
             this.currentPrice = item["0"].$value,
             this.profileImg = item["1"].$value
