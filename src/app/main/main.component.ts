@@ -23,8 +23,8 @@ export class MainComponent implements OnInit {
     this.toggleText = "Don't have an account? Sign up";
     this.af.auth.subscribe((auth) => {
       console.log(auth);
-      if(!auth) {
-        router.navigate(['/home']);
+      if(auth) {
+        router.navigate(['/profile']);
       }
     });
   }
@@ -71,6 +71,7 @@ export class MainComponent implements OnInit {
       email: '' + this.email,
       password: '' + this.password,
     });
+    this.router.navigate(['/profile', ]);
   }
 
 }
