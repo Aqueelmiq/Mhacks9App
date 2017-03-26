@@ -41,8 +41,9 @@ export class StockbuyerComponent implements OnInit {
     this.toggleText = "Buy Stock"
     var x = {};
     let today = new Date();
-    let stamp = this.name + today.getTime();
+    let stamp = this.name + "@" + today.getTime();
     x[stamp] = {name: this.name, qty: this.quantity, date: today.getTime(), price: this.currentPrice}
+    this.stocks.set(x);
   }
 
   stock_sell(){
