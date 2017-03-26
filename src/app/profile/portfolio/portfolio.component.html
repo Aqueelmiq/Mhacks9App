@@ -3,14 +3,12 @@
   <div class="card-block">
     <table class="table">
       <tbody>
-      <tr *ngFor="let meme of portfolio">
-        <th scope="row">Current price:</th>
-        <td> Meme: {{meme.name}}</td>
-        <td>Current Price: {{meme.current_price}}</td>
-        <td>Stocks Bought: {{meme.qty}}</td>
-        <td>Total value: {{meme.qty}}</td>
-        <td>Net Revenue: {{meme.qty}}</td>
-        <td>30%</td>
+      <tr *ngFor="let key of keys">
+        <td> Meme: {{actual[key].name}}</td>
+        <td>Current Price: {{current_price}}</td>
+        <td>Stocks Bought: {{actual[key].quantity}}</td>
+        <td>Total value: {{actual[key].quantity*current_price}}</td>
+        <td>Net Revenue: {{parseInt(actual[key].quantity*current_price - actual[key].quantity*actual[key].pur_price)}}</td>
       </tr>
       </tbody>
     </table>
