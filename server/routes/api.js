@@ -1,14 +1,44 @@
 const express = require('express');
 const router = express.Router();
 const googleTrends = require('google-trends-api');
+const http = require('http');
 
 /* GET api listing. */
 router.get('/:key', (req, res) =>
   googleTrends.interestOverTime({keyword: req.params.key}, function(err, results){
     if(err) console.error('there was an error!', err);
     else {
-      let data = JSON.parse(results);
-      res.json({name: req.params.key, trends: data});
+      var data = JSON.parse(results);
+      var sumPercentages = 0;
+      var peakDate = '';
+      var curr = 0;
+      var months = data['default']['timelineData'];
+      for (var i=0; i<months.length; i++ ) {
+        var month = months[i];
+        curr = parseInt(month['value']);
+        sumPercentages += curr;
+        if (curr == 100) {
+          peakDate = month['formattedTime'].split(" ");
+        }
+      }
+      var pyurl = "http://127.0.0.1:5000?name="+req.params.key;
+
+      http.get(pyurl, function(resp){
+        var ret = "";
+        resp.on('data', function(chunk){
+          ret += chunk;
+        });
+        resp.on('end', function() {
+          var parsed = JSON.parse(ret);
+          var img_url = parsed['img_url'];
+          var total = parsed['total'];
+          var peak_price = (100*total)/sumPercentages;
+          var current_price = curr*peak_price/100;
+          res.json({name: req.params.key, current_price: Math.round(current_price), peak_price: Math.round(peak_price), peakMonth: peakDate[0], peakYear: peakDate[1], img_url: img_url});
+        });
+      }).on("error", function(e){
+        console.log("Got error: " + e.message);
+      });
     }
   })
 );
