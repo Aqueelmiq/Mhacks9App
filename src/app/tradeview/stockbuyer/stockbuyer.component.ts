@@ -14,7 +14,7 @@ export class StockbuyerComponent implements OnInit {
   mathh: string;
   buying: boolean;
   toggleText: string;
-
+  uid: string;
   stocks;
 
   constructor(public af: AngularFire) {
@@ -25,6 +25,7 @@ export class StockbuyerComponent implements OnInit {
     this.currentPrice = 4.3;
     this.mathh = "$ " + Math.round(this.quantity*this.currentPrice*100)/100;
     this.af.auth.subscribe(auth => {
+      this.uid = auth.uid;
       this.stocks = this.af.database.object('/user/' + auth.uid + "/stocks");
     })
   }
@@ -42,8 +43,10 @@ export class StockbuyerComponent implements OnInit {
     var x = {};
     let today = new Date();
     let stamp = this.name + "@" + today.getTime();
-    x[stamp] = {name: this.name, qty: this.quantity, date: today.getTime(), price: this.currentPrice}
-    this.stocks.set(x);
+    x[stamp] = {quantity: this.quantity, date: today.getTime(), pur_price: this.currentPrice, name: this.name};
+    this.stocks = this.af.database.object('/user/' + this.uid + "/stocks/" + stamp);
+
+    this.stocks.update(x[stamp]);
   }
 
   stock_sell(){
