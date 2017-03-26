@@ -4,11 +4,13 @@ const googleTrends = require('google-trends-api');
 const http = require('http');
 
 /* GET api listing. */
-router.get('/:key', (req, res) =>
-  googleTrends.interestOverTime({keyword: req.params.key}, function(err, results){
+router.get('/:name', (req, res) =>
+  googleTrends.interestOverTime({keyword: req.params.name}, function(err, results){
     if(err) console.error('there was an error!', err);
     else {
       var data = JSON.parse(results);
+      console.log("hello");
+      console.log(req.params.name);
       var sumPercentages = 0;
       var peakDate = '';
       var curr = 0;
@@ -16,6 +18,7 @@ router.get('/:key', (req, res) =>
       var withinYear = false;
       var maxminYear = [-1,101];
       var yearAgo = prevYear(months[months.length-1]['formattedTime']);
+      console.log("hello2");
       for (var i=0; i<months.length; i++ ) {
         var month = months[i];
         curr = parseInt(month['value']);
@@ -30,7 +33,7 @@ router.get('/:key', (req, res) =>
           withinYear = true;
         }
       }
-      var pyurl = "http://127.0.0.1:5000?name="+req.params.key;
+      var pyurl = "http://127.0.0.1:5000?name="+req.params.name;
 
       http.get(pyurl, function(resp){
         var ret = "";
@@ -45,7 +48,7 @@ router.get('/:key', (req, res) =>
           var current_price = peak_price*(curr/100);
           var year_high_price = peak_price*(maxminYear[0]/100);
           var year_low_price = peak_price*(maxminYear[1]/100);
-          res.json({name: req.params.key,
+          res.json({name: req.params.name,
             total: normalize(total),
             current_percentage: curr,
             current_price: Math.round(normalize(current_price)*100)/100,  //2 decimal places

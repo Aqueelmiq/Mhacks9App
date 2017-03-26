@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AngularFire} from "angularfire2";
+import {Stock} from "../../models/Stock";
 
 @Component({
   selector: 'app-stockbuyer',
@@ -8,7 +9,8 @@ import {AngularFire} from "angularfire2";
 })
 export class StockbuyerComponent implements OnInit {
 
-  @Input() name:string;
+  @Input() stock: Stock;
+  name:string;
   quantity: number;
   currentPrice: number;
   mathh: string;
@@ -21,6 +23,7 @@ export class StockbuyerComponent implements OnInit {
   stock_dic: Object;
   constructor(public af: AngularFire) {
 
+   // this.name = this.stock.name;
     this.toggleText = "Buy Stock"
     this.buying = true;
     this.quantity = 0;
