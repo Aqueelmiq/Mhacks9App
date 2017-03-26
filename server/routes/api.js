@@ -32,9 +32,17 @@ router.get('/:key', (req, res) =>
           var parsed = JSON.parse(ret);
           var img_url = parsed['img_url'];
           var total = parsed['total'];
-          var peak_price = (100*total)/sumPercentages;
-          var current_price = curr*peak_price/100;
-          res.json({name: req.params.key, current_price: Math.round(current_price), peak_price: Math.round(peak_price), peakMonth: peakDate[0], peakYear: peakDate[1], img_url: img_url});
+          var peak_price = total*(100/sumPercentages);
+          var current_price = peak_price*(curr/100);
+          res.json({name: req.params.key,
+            total: total,
+            current_percentage: curr,
+            current_price: Math.round(current_price),
+            peak_price: Math.round(peak_price),
+            peak_month: peakDate[0],
+            peak_year: peakDate[1],
+            img_url: img_url
+          });
         });
       }).on("error", function(e){
         console.log("Got error: " + e.message);
