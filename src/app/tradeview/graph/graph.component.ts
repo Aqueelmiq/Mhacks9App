@@ -1,4 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {DataService} from "../../services/dataservice.service";
 
 
 @Component({
@@ -8,6 +10,9 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 })
 export class GraphComponent implements OnInit {
 
+  name;
+  stock;
+  image;
   public lineChartData: Array<any> = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}
   ];
@@ -48,8 +53,20 @@ export class GraphComponent implements OnInit {
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
-  constructor() {
-
+  constructor(public routing: ActivatedRoute, public ds: DataService) {
+    this.routing.params.subscribe(params => {
+      this.name = params['name'];
+      this.stock = this.ds.getMemes(this.name)[0];
+      this.ds.loadData(this.name).subscribe((data) =>{
+        var d = []
+        for(var i=1; i<12; i++) {
+          d.push(data[`m${i}`])
+        }
+        this.lineChartData[0].data = d;
+        this.lineChartData[0].data.slice();
+        console.log(this.lineChartData[0].data);
+      })
+    });
   }
 
   ngOnInit() {
