@@ -3,10 +3,7 @@
     <a class="col-md-1 navbar-brand pl-3" href="#">
       <img src="../../assets/logo.png" width="50" height="30" alt="">
     </a>
-    <form class="col-md-5 push-md-4 form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <app-searchcomponent></app-searchcomponent>
     <div class="col-md-2 push-md-4">
       <div class="row justify-content-end pr-4">
         <button *ngIf="!login" class="btn btn-primary text-white"> {{btn1}} </button>
