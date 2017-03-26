@@ -7,8 +7,9 @@
         <td> Meme: {{actual[key].name}}</td>
         <td>Current Price: {{current_price}}</td>
         <td>Stocks Bought: {{actual[key].quantity}}</td>
-        <td>Total value: {{actual[key].quantity*current_price}}</td>
-        <td>Net Revenue: {{parseInt(actual[key].quantity*current_price - actual[key].quantity*actual[key].pur_price)}}</td>
+        <td>Total value: ${{actual[key].quantity*current_price}}</td>
+        <td>Net Revenue: ${{actual[key].quantity*current_price - actual[key].quantity*actual[key].pur_price}}</td>
+        <td>Date Bought: {{actual[key].date}}</td>
       </tr>
       </tbody>
     </table>

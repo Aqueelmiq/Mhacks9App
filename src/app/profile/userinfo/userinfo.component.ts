@@ -51,16 +51,16 @@ export class UserinfoComponent implements OnInit {
       this.items = this.af.database.object(this.url);
       this.items.subscribe( item => {
           this.itom = item;
-          console.log(item);
+          //console.log(item);
           this.userName = this.itom["name"];
-          console.log(this.itom["name"]);
+          //console.log(this.itom["name"]);
           this.balance = this.itom["balance"];
-        console.log(this.itom["balance"]);
+        //console.log(this.itom["balance"]);
           this.profileImg = this.itom["img"];
         }
       );
     });
-    console.log
+    //console.log
   }
 
 

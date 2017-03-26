@@ -26,20 +26,16 @@ export class PortfolioComponent implements OnInit {
   ngOnInit() {
     this.af.auth.subscribe((auth) => {
       this.url = "user/" + auth["uid"] + "/stocks/";
-      console.log(this.url);
+      //console.log(this.url);
       this.items = this.af.database.object(this.url);
       this.items.subscribe( item => {
-          console.log(item);
+          //console.log(item);
           this.actual = item;
         this.keys = Object.keys(item);
         }
       );
     });
 
-  }
-
-  getRev(key) {
-    return Math.round((this.actual[key].quantity*this.current_price - this.actual[key].quantity*this.actual[key].pur_price)*100)/100;
   }
 
 }
