@@ -19,17 +19,18 @@ export class TradeviewComponent implements OnInit {
 
   constructor(public routing: ActivatedRoute, public af: AngularFire, public ds: DataService) {
 
+    this.routing.params.subscribe(params => {
+      this.memeImg = params['img'];
+      this.name = params['name'];
+      this.stock = this.ds.getMemes(this.name)[0];
+    });
+
   }
 
   ngOnInit() {
 
     this.af.auth.subscribe(auth => {
       if(auth) this.login = true;
-    });
-
-    this.routing.params.subscribe(params => {
-      this.memeImg = params['img'];
-      this.name = params['name'];
     });
 
     this.stock = this.ds.getMemes(this.name)[0];

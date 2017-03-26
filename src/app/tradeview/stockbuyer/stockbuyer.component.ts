@@ -31,12 +31,13 @@ export class StockbuyerComponent implements OnInit {
     this.routing.params.subscribe(params => {
       this.name = params['name'];
       this.stock = this.ds.getMemes(this.name)[0];
+      this.currentPrice = this.stock.current_value;
     });
 
     this.toggleText = "Buy Stock"
     this.buying = true;
     this.quantity = 0;
-    this.currentPrice = 4.3;
+
     this.total_price = "$ " + Math.round(this.quantity*this.currentPrice*100)/100;
     this.af.auth.subscribe(auth => {
       this.uid = auth.uid;
@@ -56,8 +57,12 @@ export class StockbuyerComponent implements OnInit {
     this.total_price = "$ " + Math.round(this.quantity*this.currentPrice*100)/100;
   }
 
+  toggle() {
+    if(this.buying) this.stock_buy();
+    else this.stock_sell();
+  }
+
   stock_buy(){
-    this.buying = true;
     this.toggleText = "Buy Stock"
     var x = {};
     let today = new Date();
@@ -80,14 +85,17 @@ export class StockbuyerComponent implements OnInit {
   }
 
   stock_sell(){
-    this.buying = false;
     this.toggleText = "Sell Stock"
-    console.log(this.stock_dic);
-    for(let key in this.stock_dic){
-      console.log(key);
-      if(key.search(this.name)){
-        console.log(key);
+    for (var property in this.stock_dic) {
+      if (this.stock_dic.hasOwnProperty(property)) {
+        let str = property.substring(0, property.indexOf("@"));
+        console.log(str);
+        if(str === this.name) {
+          console.log(this.stock_dic[property]);
+        }
       }
     }
+
   }
+
 }

@@ -48,6 +48,10 @@ export class GraphComponent implements OnInit {
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
+  constructor() {
+
+  }
+
   ngOnInit() {
   }
 

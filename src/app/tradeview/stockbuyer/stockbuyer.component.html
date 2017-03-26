@@ -34,19 +34,19 @@
         <div class="row">
           <div class="form-check pl-3">
             <label class="form-check-label">
-              <input type="radio" (click)="stock_buy()" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+              <input type="radio" (click)="buying = !buying" (change)="buying = !buying" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
               Buy
             </label>
           </div>
           <div class="form-check pl-3">
             <label class="form-check-label">
-              <input type="radio" (click)="stock_sell()" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+              <input type="radio" (click)="buying = !buying" (change)="buying = !buying" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
               Sell
             </label>
           </div>
         </div>
       </fieldset>
     </form>
-    <a href="#" class="btn btn-primary">{{toggleText}}</a>
+    <a href="#" class="btn btn-primary" (click)="toggle()">{{toggleText}}</a>
   </div>
 </div>
