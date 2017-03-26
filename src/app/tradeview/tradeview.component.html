@@ -6,10 +6,10 @@
         <img class="card-img" height="400px" width="433px" src="{{memeImg}}">
       </div>
       <div class="col stock-info">
-        <app-stockinfo></app-stockinfo>
+        <app-stockinfo [stock]="stock"></app-stockinfo>
       </div>
       <div class="col stock-buyer">
-        <app-stockbuyer [name]="name"></app-stockbuyer>
+        <app-stockbuyer [stock]="stock"></app-stockbuyer>
       </div>
     </div>
   </div>

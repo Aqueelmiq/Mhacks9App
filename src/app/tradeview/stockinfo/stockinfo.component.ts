@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Stock} from "../../models/Stock";
 
 @Component({
   selector: 'app-stockinfo',
@@ -7,6 +8,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./stockinfo.component.css']
 })
 export class StockinfoComponent implements OnInit {
+
+  @Input() stock: Stock;
   memeName:String;
   currentPrice:String;
   marketCap: String;
@@ -15,12 +18,13 @@ export class StockinfoComponent implements OnInit {
   memeLow: String;
 
   constructor(public routing:ActivatedRoute) {
-    this.memeName = "Pepe the frog";
-    this.currentPrice = "$5";
-    this.marketCap = "50 mil";
-    this.opening = "$4";
-    this.memeHigh = "10";
-    this.memeLow = "28";
+    //this.memeName = this.stock.name;
+    /**
+    this.currentPrice = "$" + this.stock.current_price;
+    this.marketCap = this.stock.cap + " mil";
+    this.opening = "$" + this.stock.current_price; ;
+    this.memeHigh = this.stock.year_high + "";
+    this.memeLow = this.stock.year_low + ""; **/
   }
 
   ngOnInit() {

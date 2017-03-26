@@ -9,6 +9,8 @@ router.get('/:name', (req, res) =>
     if(err) console.error('there was an error!', err);
     else {
       var data = JSON.parse(results);
+      console.log("hello");
+      console.log(req.params.name);
       var sumPercentages = 0;
       var peakDate = '';
       var curr = 0;
@@ -16,6 +18,7 @@ router.get('/:name', (req, res) =>
       var withinYear = false;
       var maxminYear = [-1,101];
       var yearAgo = prevYear(months[months.length-1]['formattedTime']);
+      console.log("hello2");
       for (var i=0; i<months.length; i++ ) {
         var month = months[i];
         curr = parseInt(month['value']);

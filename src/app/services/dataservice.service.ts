@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toPromise';
+import {Observable} from "rxjs";
 
 @Injectable()
 export class DataService {
@@ -15,11 +16,7 @@ export class DataService {
     new Stock("Harambe", "http://cbsnews1.cbsistatic.com/hub/i/2016/06/01/be84a529-4da6-4981-b3d8-306f852e5001/133086105858279649186878551590185511304691o.jpg"),
     new Stock("Pepe The Frog", "http://www.trbimg.com/img-57fd09fa/turbine/la-na-pol-pepe-the-frog-hate-symbol-20161011-snap"),
     new Stock("Nyan Cat", "https://fthmb.tqn.com/uMGI5iu-pe9YaxocWZGUiBRD1Z4=/400x250/filters:no_upscale()/about/meme-baby1-580700253df78cbc28b1b442.PNG"),
-    new Stock("Haters Gonna Hate", "https://fthmb.tqn.com/uMGI5iu-pe9YaxocWZGUiBRD1Z4=/400x250/filters:no_upscale()/about/meme-baby1-580700253df78cbc28b1b442.PNG"),
-    new Stock("Harlem Shake", "https://fthmb.tqn.com/uMGI5iu-pe9YaxocWZGUiBRD1Z4=/400x250/filters:no_upscale()/about/meme-baby1-580700253df78cbc28b1b442.PNG"),
-    new Stock("Troll Face", "https://fthmb.tqn.com/uMGI5iu-pe9YaxocWZGUiBRD1Z4=/400x250/filters:no_upscale()/about/meme-baby1-580700253df78cbc28b1b442.PNG"),
-    new Stock("Salt Bae", "https://fthmb.tqn.com/uMGI5iu-pe9YaxocWZGUiBRD1Z4=/400x250/filters:no_upscale()/about/meme-baby1-580700253df78cbc28b1b442.PNG")
-  ]
+   ];
 
   data = [
     'Oh No Baby! What Is You Doin???',
@@ -96,9 +93,27 @@ export class DataService {
         .map((res) => {
           return res.json();
         }).subscribe((data) => {
-          this.memes.push(new Stock(data['name'], data["img_url"]));
+          var stock = new Stock(data['name'], data["img_url"]);
+          stock.cap = data['total'];
+          stock.current_percentage = data['current_percentage'];
+          stock.peak_price = data["peak_price"];
+          stock.peak_month = data["peak_month"];
+          stock.peak_year = data["peak_year"];
+          stock.peak_month = data["peak_month"];
+          stock.current_price = data["current_price"];
+          stock.year_high = data["year_high"];
+          stock.year_low = data["year_low"];
+          this.memes.push(stock);
         });
     });
+  }
+
+  loadMeme(meme): Observable<any> {
+    let x = this.uri + encodeURIComponent(meme.trim());
+    return this.http.get(x, {})
+      .map((res) => {
+        return res.json();
+      })
   }
 
 }
