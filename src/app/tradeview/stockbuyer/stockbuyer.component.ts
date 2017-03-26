@@ -63,6 +63,16 @@ export class StockbuyerComponent implements OnInit {
   }
 
   stock_buy(){
+
+    this.af.database.list('/memes').subscribe(memes => {
+      memes.forEach((meme, index) => {
+        if(meme["img_url"] === this.stock.img_url) {
+          meme["current_price"] = meme["current_price"] + this.quantity*0.0003*meme["current_price"];
+          this.af.database.object(`meme/${index}`).set(meme);
+        }
+      })
+    })
+
     this.toggleText = "Buy Stock"
     var x = {};
     let today = new Date();
@@ -85,6 +95,16 @@ export class StockbuyerComponent implements OnInit {
   }
 
   stock_sell(){
+
+    this.af.database.list('/memes').subscribe(memes => {
+      memes.forEach((meme, index) => {
+        if(meme["img_url"] === this.stock.img_url) {
+          meme["current_price"] = meme["current_price"] + this.quantity*0.0003*meme["current_price"];
+          this.af.database.object(`meme/${index}`).set(meme);
+        }
+      })
+    })
+
     this.toggleText = "Sell Stock"
     this.toggleText = "Buy Stock"
     var x = {};
