@@ -47,7 +47,8 @@ def img_url(meme):
 def meme2json():
     memename = request.args['name']
     extension = getExtension(memename)
-    json_dict = { f: eval('{}(\'{}\')'.format(f,extension)) for f in info}
+    json_dict = { f: eval('{}(\'{}\')'.format(f,extension)) for f in info }
+    json_dict['name'] = memename
     return jsonify(json_dict)
 
 if __name__ == '__main__':
