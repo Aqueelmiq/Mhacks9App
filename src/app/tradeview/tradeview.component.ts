@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AngularFire} from "angularfire2";
 import {DataService} from "../services/dataservice.service";
-import {Stock} from "../models/Stock";
 import {Meme} from "../models/Meme";
 
 @Component({
