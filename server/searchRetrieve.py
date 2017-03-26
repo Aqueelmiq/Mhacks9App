@@ -5,7 +5,15 @@ import re
 app = Flask(__name__)
 
 def getExtension(meme):
-    return '-'.join(word.lower() for word in meme.split())
+    s = meme.strip()
+    ret, prev = '', ''
+    for i in range(0,len(s)):
+        x = '-' if s[i] in "' " else s[i].lower()
+        if x == prev == '-' or not (x == '-' or x.isalnum()):
+            continue
+        ret += x
+        prev = x
+    return ret
 
 ### INFO RETRIEVAL ###
 info = ['total','img_url']
