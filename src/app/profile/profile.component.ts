@@ -12,12 +12,7 @@ export class ProfileComponent implements OnInit {
   items: FirebaseListObservable<any[]>;
   url: string;
   constructor(public routing: ActivatedRoute, public af: AngularFire) {
-    this.af.auth.subscribe((auth) => {
-      console.log(auth["uid"]);
-      this.url = "/user/" + auth["uid"];
-      this.items = this.af.database.list(this.url);
-      this.items.subscribe(item => console.log(item));
-    });
+
   }
 
   ngOnInit() {
