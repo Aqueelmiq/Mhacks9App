@@ -44,13 +44,13 @@ export class StockbuyerComponent implements OnInit {
       this.stocks = this.af.database.object('/user/' + auth.uid);
       this.stocks.subscribe(item => {
         this.balance = item["balance"];
+        this.new_bal = this.balance;
         this.stock_dic = item["stocks"];
         })
     })
   }
 
   ngOnInit() {
-
   }
 
   calculatePrice(){
@@ -58,6 +58,7 @@ export class StockbuyerComponent implements OnInit {
   }
 
   toggle() {
+    this.new_bal = 0;
     if(this.buying) this.stock_buy();
     else this.stock_sell();
   }
@@ -79,13 +80,14 @@ export class StockbuyerComponent implements OnInit {
     let stamp = this.name + "@" + today.getTime();
     x[stamp] = {quantity: 0-this.quantity, date: today.getTime(), pur_price: this.currentPrice, name: this.name};
     this.stocks = this.af.database.object('/user/' + this.uid + "/stocks/" + stamp);
-    this.new_bal = this.balance + this.quantity*this.currentPrice;
+    this.new_bal = this.balance - this.quantity*this.currentPrice;
     if(this.quantity != 0){
       this.stocks.update(x[stamp]);
     }
     this.stocks = this.af.database.object('/user/' + this.uid );
     var y = {};
     y["balance"] = this.new_bal
+    console.log(this.new_bal)
     if(this.quantity != 0){
       this.stocks.update(y);
     }
@@ -99,20 +101,20 @@ export class StockbuyerComponent implements OnInit {
     this.af.database.list('/memes').subscribe(memes => {
       memes.forEach((meme, index) => {
         if(meme["img_url"] === this.stock.img_url) {
-          meme["current_price"] = meme["current_price"] + this.quantity*0.0003*meme["current_price"];
-          this.af.database.object(`meme/${index}`).set(meme);
+          meme["current_price"] = meme["current_price"] - this.quantity*0.0003*meme["current_price"];
+          this.currentPrice = meme["current_price"];
+          this.af.database.object(`memes/${index}`).set(meme);
         }
       })
     })
 
     this.toggleText = "Sell Stock"
-    this.toggleText = "Buy Stock"
     var x = {};
     let today = new Date();
     let stamp = this.name + "@" + today.getTime();
     x[stamp] = {quantity: this.quantity, date: today.getTime(), pur_price: this.currentPrice, name: this.name};
     this.stocks = this.af.database.object('/user/' + this.uid + "/stocks/" + stamp);
-    this.new_bal = this.balance - this.quantity*this.currentPrice;
+    this.new_bal = this.balance + this.quantity*this.currentPrice;
     if(this.quantity != 0){
       this.stocks.update(x[stamp]);
     }
@@ -121,9 +123,6 @@ export class StockbuyerComponent implements OnInit {
     y["balance"] = this.new_bal
     if(this.quantity != 0){
       this.stocks.update(y);
-    }
-    if(this.new_bal <0){
-      alert("You cannot make that transaction. Not enough money");
     }
 
   }
