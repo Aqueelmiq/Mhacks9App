@@ -4,14 +4,19 @@
     <table class="table">
       <tbody>
       <tr>
-
+        <td>
+          Your Balance
+        </td>
+        <td>
+          {{new_bal}}
+        </td>
+      </tr>
+      <tr>
         <td>
           Quantity
         </td>
         <td>
-          <div class="form-group">
-            <label for="exampleInputEmail1"> Total Price </label>
-          </div>
+          Total Price
         </td>
       </tr>
       <tr>
@@ -34,19 +39,19 @@
         <div class="row">
           <div class="form-check pl-3">
             <label class="form-check-label">
-              <input type="radio" (click)="buying = !buying" (change)="buying = !buying" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+              <input type="radio" (change)="buying = true" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
               Buy
             </label>
           </div>
           <div class="form-check pl-3">
             <label class="form-check-label">
-              <input type="radio" (click)="buying = !buying" (change)="buying = !buying" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+              <input type="radio" (change)="buying = false" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
               Sell
             </label>
           </div>
         </div>
       </fieldset>
     </form>
-    <button class="btn btn-primary" (click)="toggle()">{{toggleText}}</button>
+    <button class="btn btn-primary" (click)="toggle()">Perform Action</button>
   </div>
 </div>

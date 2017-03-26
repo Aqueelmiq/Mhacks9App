@@ -70,6 +70,19 @@ export class GraphComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.routing.params.subscribe(params => {
+      this.name = params['name'];
+      this.stock = this.ds.getMemes(this.name)[0];
+      this.ds.loadData(this.name).subscribe((data) =>{
+        var d = []
+        for(var i=1; i<12; i++) {
+          d.push(data[`m${i}`])
+        }
+        this.lineChartData[0].data = d;
+        this.lineChartData[0].data.slice();
+        console.log(this.lineChartData[0].data);
+      })
+    });
   }
 
   // events
