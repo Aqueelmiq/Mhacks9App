@@ -1,4 +1,4 @@
-<div class="col-md-6 push-md-3 mt-3">
+
   <div class="input-group">
     <input (keyup)="searchAction()" [(ngModel)]="keyword" id="1" class="form-control" type="text" name="keyword" placeholder="Search..." required/>
     <span class="input-group-btn search-btn">
@@ -7,7 +7,7 @@
       </button>
       </span>
   </div>
-  <ul class="list-group py-2">
+  <ul class="list-group search-results py-2">
     <li *ngFor="let meme of memes"
         class="list-group-item li-item row align-items-center"
         (mouseover)="highlight($event)" (mouseout)="dehighlight($event)"
@@ -18,4 +18,3 @@
         <div class="col-md-9"> {{meme.name}}</div>
     </li>
   </ul>
-</div>

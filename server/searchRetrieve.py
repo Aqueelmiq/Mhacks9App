@@ -8,8 +8,8 @@ def getExtension(meme):
     return '-'.join(word.lower() for word in meme.split())
 
 ### INFO RETRIEVAL ###
-info = ['cap','img_url']
-def cap(meme):  #total amount of searches
+info = ['total','img_url']
+def total(meme):  #total amount of searches
     #meme is in extension form (hyphenated)
     url = 'http://knowyourmeme.com/memes/{}'.format(meme)
     regexp = r"<a href=\\'\/memes\/{}\\' rel=\\'nofollow\\'>(\d*,?\d*,?\d+)<\/a>".format(meme)
@@ -26,7 +26,7 @@ def cap(meme):  #total amount of searches
     except urllib.error.HTTPError:
         print("Meme not in the repository")
         return None
-                
+
 def img_url(meme):
     url = 'http://knowyourmeme.com/memes/{}'.format(meme)
     regexp = r'<a href=\"(http:\/\/i\d\.kym-cdn\.com.+)\" class=\"photo left\">'
@@ -43,7 +43,7 @@ def img_url(meme):
         print("Meme not in the repository")
         return None
 
-@app.route("/meme")
+@app.route("/")
 def meme2json():
     memename = request.args['name']
     extension = getExtension(memename)

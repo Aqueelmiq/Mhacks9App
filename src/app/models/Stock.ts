@@ -5,6 +5,7 @@ export class Stock {
   change: number;
   opening: number;
   cap: number;
+  total: number;
   year_high: number;
   year_low: number;
   img_url: string;
