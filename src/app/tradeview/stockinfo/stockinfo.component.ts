@@ -18,6 +18,7 @@ export class StockinfoComponent implements OnInit {
   opening: string;
   memeHigh: string;
   memeLow:string;
+  advice:string;
 
   constructor(public routing:ActivatedRoute, public ds: DataService) {
     this.routing.params.subscribe(params => {
@@ -28,6 +29,13 @@ export class StockinfoComponent implements OnInit {
       this.opening = "$" + this.stock.current_value;
       this.memeHigh = this.stock.year_high + "";
       this.memeLow = this.stock.year_low + "";
+      this.advice = "buy";
+      if(this.opening>this.memeHigh){
+        this.advice = "sell";
+      }
+      else{
+        this.advice = "buy";
+      }
     });
   }
 

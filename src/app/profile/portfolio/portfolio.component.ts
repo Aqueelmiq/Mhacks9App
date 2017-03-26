@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Stock} from "../../models/Stock";
 import {AngularFire, FirebaseObjectObservable} from "angularfire2";
+import {DataService} from "../../services/dataservice.service";
 
 @Component({
   selector: 'app-portfolio',
@@ -17,7 +18,7 @@ export class PortfolioComponent implements OnInit {
   total_value: string;
   net_revenue:string;
 
-  constructor(public af: AngularFire) {
+  constructor(public af: AngularFire, public ds: DataService) {
     this.current_price = 5;
     this.total_value = "$50";
     this.net_revenue = "500";

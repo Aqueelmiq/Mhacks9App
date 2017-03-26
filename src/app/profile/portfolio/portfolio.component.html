@@ -5,7 +5,6 @@
       <tbody>
       <tr *ngFor="let key of keys">
         <td> Meme: {{actual[key].name}}</td>
-        <td>Current Price: {{current_price}}</td>
         <td>Stocks Bought: {{actual[key].quantity}}</td>
         <td>Total value: ${{actual[key].quantity*current_price}}</td>
         <td>Net Revenue: ${{actual[key].quantity*current_price - actual[key].quantity*actual[key].pur_price}}</td>
