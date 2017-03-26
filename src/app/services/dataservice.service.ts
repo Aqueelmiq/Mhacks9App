@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Stock} from "../models/Stock";
+import {Http} from "@angular/http";
+
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DataService {
@@ -14,12 +20,41 @@ export class DataService {
     new Stock("Troll Face", "https://fthmb.tqn.com/uMGI5iu-pe9YaxocWZGUiBRD1Z4=/400x250/filters:no_upscale()/about/meme-baby1-580700253df78cbc28b1b442.PNG"),
     new Stock("Salt Bae", "https://fthmb.tqn.com/uMGI5iu-pe9YaxocWZGUiBRD1Z4=/400x250/filters:no_upscale()/about/meme-baby1-580700253df78cbc28b1b442.PNG")
   ]
-  constructor() { }
+
+  data = [
+    'forever alone',
+    'overly attached girlfriend',
+    'harambe the gorilla'
+  ];
+
+  results = [];
+
+  constructor(public http: Http) {
+    this.loadMemes();
+  }
 
   getMemes(keyword: string): Stock[] {
     return this.memes.filter((val) => {
       if(val.name.toLowerCase().includes(keyword.toLowerCase()))
         return true;
+    });
+  }
+
+  uri = '/api/';
+
+  loadMemes() {
+    this.data.forEach((val) => {
+      let x = this.uri + encodeURIComponent(val.trim());
+      this.http.get(x, {})
+        .map((res) => {
+          alert(JSON.stringify(res.json()));
+          return res.json();
+        })
+        .toPromise()
+        .then((data) => {
+          alert(data);
+          this.results.push(data)
+        });
     });
   }
 
