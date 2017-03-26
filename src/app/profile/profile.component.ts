@@ -8,9 +8,12 @@ import auth = firebase.auth;
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
+
   items: FirebaseListObservable<any[]>;
   url: string;
+
   constructor(public routing: ActivatedRoute, public af: AngularFire) {
 
   }
