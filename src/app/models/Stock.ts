@@ -13,6 +13,7 @@ export class Stock {
   year_high: number;
   year_low: number;
   img_url: string;
+  trend: Array<number> = [];
 /**
   new Stock(data['name'], data['total'],
   data['current_percentage'], data["current_price"], data['peak_price'],

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/dataservice.service';
 import { Stock } from '../../models/Stock'
 import {Router} from "@angular/router";
+import {Meme} from "../../models/Meme";
 
 
 @Component({
@@ -12,7 +13,8 @@ import {Router} from "@angular/router";
 export class SearchComponent implements OnInit {
 
   keyword: string;
-  memes: Stock[]; //Observable<any[]>;
+  memes: Meme[];
+
   constructor(public ds: DataService, public router: Router) {
     this.keyword = '';
   }
@@ -28,12 +30,12 @@ export class SearchComponent implements OnInit {
     event.target.className = event.target.className.replace("active", "");
   }
 
-  searchAction(){
-    console.log(this.keyword);
+  searchAction() {
     this.memes = this.ds.getMemes(this.keyword);
   }
 
   selectMeme(meme) {
+    this.memes = [];
     this.router.navigate(['/trade', { name: meme.name, img: meme.img_url}]);
   }
 }

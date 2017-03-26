@@ -16,7 +16,6 @@ def getExtension(meme):
     return ret
 
 ### INFO RETRIEVAL ###
-info = ['total','img_url']
 def total(meme):  #total amount of searches
     #meme is in extension form (hyphenated)
     url = 'http://knowyourmeme.com/memes/{}'.format(meme)
@@ -33,7 +32,7 @@ def total(meme):  #total amount of searches
                 return None
     except urllib.error.HTTPError:
         print("Meme not in the repository")
-        return None
+        return 0
 
 def img_url(meme):
     url = 'http://knowyourmeme.com/memes/{}'.format(meme)
@@ -49,13 +48,14 @@ def img_url(meme):
                 return None
     except urllib.error.HTTPError:
         print("Meme not in the repository")
-        return None
+        return "notfound.jpg"
 
 @app.route("/")
 def meme2json():
     memename = request.args['name']
     extension = getExtension(memename)
-    json_dict = { f: eval('{}(\'{}\')'.format(f,extension)) for f in info }
+    json_dict = { 'total': total(extension) }
+    json_dict['img_url'] = img_url(extension)
     json_dict['name'] = memename
     return jsonify(json_dict)
 
