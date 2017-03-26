@@ -67,9 +67,9 @@ export class StockbuyerComponent implements OnInit {
     var x = {};
     let today = new Date();
     let stamp = this.name + "@" + today.getTime();
-    x[stamp] = {quantity: this.quantity, date: today.getTime(), pur_price: this.currentPrice, name: this.name};
+    x[stamp] = {quantity: 0-this.quantity, date: today.getTime(), pur_price: this.currentPrice, name: this.name};
     this.stocks = this.af.database.object('/user/' + this.uid + "/stocks/" + stamp);
-    this.new_bal = this.balance - this.quantity*this.currentPrice;
+    this.new_bal = this.balance + this.quantity*this.currentPrice;
     if(this.quantity != 0){
       this.stocks.update(x[stamp]);
     }
@@ -86,14 +86,24 @@ export class StockbuyerComponent implements OnInit {
 
   stock_sell(){
     this.toggleText = "Sell Stock"
-    for (var property in this.stock_dic) {
-      if (this.stock_dic.hasOwnProperty(property)) {
-        let str = property.substring(0, property.indexOf("@"));
-        console.log(str);
-        if(str === this.name) {
-          console.log(this.stock_dic[property]);
-        }
-      }
+    this.toggleText = "Buy Stock"
+    var x = {};
+    let today = new Date();
+    let stamp = this.name + "@" + today.getTime();
+    x[stamp] = {quantity: this.quantity, date: today.getTime(), pur_price: this.currentPrice, name: this.name};
+    this.stocks = this.af.database.object('/user/' + this.uid + "/stocks/" + stamp);
+    this.new_bal = this.balance - this.quantity*this.currentPrice;
+    if(this.quantity != 0){
+      this.stocks.update(x[stamp]);
+    }
+    this.stocks = this.af.database.object('/user/' + this.uid );
+    var y = {};
+    y["balance"] = this.new_bal
+    if(this.quantity != 0){
+      this.stocks.update(y);
+    }
+    if(this.new_bal <0){
+      alert("You cannot make that transaction. Not enough money");
     }
 
   }
