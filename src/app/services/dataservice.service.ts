@@ -28,32 +28,27 @@ export class DataService {
   ];
 
   results = [];
+  observables: any[];
+
+  uri = 'http://localhost:3000/api/';
 
   constructor(public http: Http) {
-    this.loadMemes();
+    this.loadMemes()
   }
 
   getMemes(keyword: string): Stock[] {
     return this.memes.filter((val) => {
-      if(val.name.toLowerCase().includes(keyword.toLowerCase()))
+      if (val.name.toLowerCase().includes(keyword.toLowerCase()))
         return true;
     });
   }
-
-  uri = '/api/';
 
   loadMemes() {
     this.data.forEach((val) => {
       let x = this.uri + encodeURIComponent(val.trim());
       this.http.get(x, {})
         .map((res) => {
-          alert(JSON.stringify(res.json()));
           return res.json();
-        })
-        .toPromise()
-        .then((data) => {
-          alert(data);
-          this.results.push(data)
         });
     });
   }
