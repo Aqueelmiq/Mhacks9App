@@ -8,11 +8,14 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() {
+  constructor(public routing: ActivatedRoute) {
 
   }
 
   ngOnInit() {
+    this.routing.params.subscribe(params => {
+      console.log("getting called");
+    });
   }
 
 }
