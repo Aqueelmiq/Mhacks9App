@@ -27,9 +27,6 @@ export class DataService {
     'harambe the gorilla'
   ];
 
-  results = [];
-  observables: any[];
-
   uri = 'http://localhost:3000/api/';
 
   constructor(public http: Http) {
@@ -49,6 +46,9 @@ export class DataService {
       this.http.get(x, {})
         .map((res) => {
           return res.json();
+        }).subscribe((data) => {
+          this.memes.push(new Stock(data['name'], data["img_url"]));
+          console.log(this.memes);
         });
     });
   }
