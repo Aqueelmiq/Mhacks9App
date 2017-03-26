@@ -22,9 +22,58 @@ export class DataService {
   ]
 
   data = [
-    'forever alone',
-    'overly attached girlfriend',
-    'harambe the gorilla'
+    'Oh No Baby! What Is You Doin???',
+    'Roll Safe',
+    'Forever Alone',
+    "Arthur's Fist",
+    'Cash Me Ousside Howbow Dah',
+    'fap-guy',
+    'Doge',
+    'Me Gusta',
+    'Trollface Coolface Problem?',
+    'First Day on the Internet Kid',
+    'Yao Ming Face / Bitch Please',
+    'Neil deGrasse Tyson Reaction',
+    '"Y U NO" Guy',
+    'Overly Attached Girlfriend',
+    'Scumbag Steve',
+    "You Don't Say?",
+    'NO. Rage Face',
+    'Pepe the Frog',
+    'philosoraptor',
+    'Bad Luck Brian',
+    'The Most Interesting Man in the World',
+    'ick Butt',
+    'pedobear',
+    'Challenge Accepted',
+    'Xzibit Yo Dawg',
+    'Oh Crap OMG Rage Face',
+    'If You Know What I Mean',
+    'Socially Awkward Penguin',
+    'Futurama Fry Not Sure If',
+    'True Story',
+    'Sweet Brown Aint Nobody Got Time for That',
+    'impossibru',
+    "I Don't Want to Live on This Planet Anymore",
+    'Success Kid I Hate Sandcastles',
+    'genius',
+    'Yes, This is Dog',
+    'Poker Face',
+    'Oh God Why',
+    'Conspiracy Keanu',
+    'College Freshman',
+    'College Liberal',
+    'Feel Like a Sir',
+    'Condescending Wonka Creepy Wonka',
+    'Trash Doves',
+    'Unhelpful High School Teacher',
+    'Confused Black Girl',
+    'Imminent Ned Brace Yourselves, Winter is Coming',
+    'McKayla is Not Impressed',
+    'Anti-Joke Chicken',
+    'harambe the gorilla',
+    'Awkward Moment Seal',
+    'Third World Success'
   ];
 
   uri = 'http://localhost:3000/api/';
@@ -48,7 +97,6 @@ export class DataService {
           return res.json();
         }).subscribe((data) => {
           this.memes.push(new Stock(data['name'], data["img_url"]));
-          console.log(this.memes);
         });
     });
   }
