@@ -9,6 +9,7 @@ import {AngularFire} from "angularfire2";
 })
 export class TradeviewComponent implements OnInit {
 
+  name = '';
   login = false;
   memeImg = "http://i.imgur.com/PsziB.jpg"
   constructor(public routing: ActivatedRoute, public af: AngularFire) { }
@@ -16,11 +17,12 @@ export class TradeviewComponent implements OnInit {
   ngOnInit() {
 
     this.af.auth.subscribe(auth => {
-      this.login = true;
+      if(auth) this.login = true;
     });
 
     this.routing.params.subscribe(params => {
       this.memeImg = params['img'];
+      this.name = params['name'];
     });
   }
 
