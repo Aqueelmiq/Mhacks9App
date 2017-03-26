@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Stock} from "../../models/Stock";
 
 @Component({
   selector: 'app-portfolio',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortfolioComponent implements OnInit {
 
-  constructor() { }
+  portfolio: any[];
+
+  constructor() {
+    this.portfolio= [{name: "Poop", current_price: 33.2, qty: 45,}];
+  }
 
   ngOnInit() {
   }
