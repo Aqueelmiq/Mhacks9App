@@ -3,6 +3,7 @@ import {AngularFire} from "angularfire2";
 import {Stock} from "../../models/Stock";
 import {Meme} from "../../models/Meme";
 import {DataService} from "../../services/dataservice.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-stockbuyer',
@@ -15,7 +16,7 @@ export class StockbuyerComponent implements OnInit {
   name:string;
   quantity: number;
   currentPrice: number;
-  mathh: string;
+  total_price: string;
   buying: boolean;
   toggleText: string;
   uid: string;
@@ -23,23 +24,27 @@ export class StockbuyerComponent implements OnInit {
   balance: number;
   new_bal:number;
   stock_dic: Object;
-  constructor(public af: AngularFire, public ds: DataService) {
 
-   // this.name = this.stock.name;
+
+  constructor(public af: AngularFire, public ds: DataService, public routing: ActivatedRoute) {
+
+    this.routing.params.subscribe(params => {
+      this.name = params['name'];
+      this.stock = this.ds.getMemes(this.name)[0];
+    });
+
     this.toggleText = "Buy Stock"
     this.buying = true;
     this.quantity = 0;
     this.currentPrice = 4.3;
-    this.mathh = "$ " + Math.round(this.quantity*this.currentPrice*100)/100;
+    this.total_price = "$ " + Math.round(this.quantity*this.currentPrice*100)/100;
     this.af.auth.subscribe(auth => {
       this.uid = auth.uid;
       this.stocks = this.af.database.object('/user/' + auth.uid);
       this.stocks.subscribe(item => {
         this.balance = item["balance"];
         this.stock_dic = item["stocks"];
-        }
-
-      )
+        })
     })
   }
 
@@ -48,7 +53,7 @@ export class StockbuyerComponent implements OnInit {
   }
 
   calculatePrice(){
-    this.mathh = "$ " + Math.round(this.quantity*this.currentPrice*100)/100;
+    this.total_price = "$ " + Math.round(this.quantity*this.currentPrice*100)/100;
   }
 
   stock_buy(){

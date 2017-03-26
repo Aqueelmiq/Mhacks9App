@@ -12,7 +12,7 @@ export class Meme {
     this.img_url = image;
     this.year_high = year_high;
     this.year_low = year_low;
-    this.current_value = this.current_value;
+    this.current_value = current_value;
   }
 
 }

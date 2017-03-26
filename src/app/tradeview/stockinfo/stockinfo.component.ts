@@ -24,13 +24,11 @@ export class StockinfoComponent implements OnInit {
       this.memeName = params['name'];
       this.stock = this.ds.getMemes(this.memeName)[0];
       this.currentPrice = "$" + this.stock.current_value;
-      this.marketCap = this.stock.year_high*834 + " mil";
+      this.marketCap = this.stock.year_high*1.4 + " mil";
       this.opening = "$" + this.stock.current_value;
       this.memeHigh = this.stock.year_high + "";
       this.memeLow = this.stock.year_low + "";
     });
-
-
   }
 
   ngOnInit() {
